@@ -7,6 +7,11 @@ fs.writeFile('./names.txt', 'Miss Xing', function (err) {
 
 setImmediate(() => console.log('Immediate'));
 setTimeout(() => console.log('timeout'), 0);
+process.nextTick(() => { console.log('next tick') });
+process.nextTick(() => { console.log('next tick') });
+process.nextTick(() => { console.log('next tick') });
+process.nextTick(() => { console.log('next tick') });
+process.nextTick(() => { console.log('next tick') });
 
 
 
