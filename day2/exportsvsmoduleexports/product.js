@@ -12,6 +12,7 @@ class Product {
     }
 }
 
+// exports.Prod = new Product('mic'); //this is bad
 exports.Prod = Product;
 
 // module.exports = Product;
