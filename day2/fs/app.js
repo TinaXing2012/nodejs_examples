@@ -9,3 +9,9 @@ fs.readFile('./names.txt', { encoding: 'utf8' }, function (err, data) {
 });
 
 console.log('end');
+
+fs.writeFileSync('./greeting1.txt', 'Hello from TIna', 'utf8');
+fs.writeFile('./greeting2.txt', 'Hello from TIna', 'utf8', function (err) {
+    if (err) throw err;
+    console.log('DOne');
+});
