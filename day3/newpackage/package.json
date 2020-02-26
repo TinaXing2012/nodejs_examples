@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "mocha": "^7.0.1"
   }
 }
