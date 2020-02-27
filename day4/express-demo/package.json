@@ -1,0 +1,15 @@
+{
+  "name": "express-demo",
+  "version": "1.0.0",
+  "description": "This is our first express demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "Rujuan Xing",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
