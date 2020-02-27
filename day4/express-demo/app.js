@@ -6,6 +6,11 @@ app.enable('case sensitive routing');
 app.enable('etag');
 app.set('env', 'development');
 
+app.use((req, res, next) => {
+    console.log('this is a middleware always being called.....');
+    next();
+});
+
 app.use('/users', (req, res, next) => {
     res.send('Hello from /users');
 });
