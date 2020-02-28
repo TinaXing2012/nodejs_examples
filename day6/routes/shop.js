@@ -1,9 +1,10 @@
 const express = require('express');
+const path = require('path');
 
 const router = express.Router();
 
 router.all('/', (req, res, next) => {
-    res.send('This is / page');
+    res.sendFile(path.join(__dirname, '..', 'views', 'index.html'));
 });
 
 router.get('/error-demo', (req, res, next) => {
