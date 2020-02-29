@@ -5,8 +5,6 @@ exports.getProductForm = (req, res, next) => {
 }
 
 exports.postProduct = (req, res, next) => {
-    console.log('save product...');
-    // console.log(req.body);
     const title = req.body.title;
     const imageUrl = req.body.imageURL;
     const price = req.body.price;
@@ -15,7 +13,5 @@ exports.postProduct = (req, res, next) => {
     const prod = new Product(title, price, imageUrl, description);
     prod.save();
 
-    console.log(Product.findAll());
-
-    res.send('Save Successfully');
+    res.redirect('/');
 }
