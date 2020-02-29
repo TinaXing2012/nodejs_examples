@@ -4,7 +4,8 @@ const path = require('path');
 const router = express.Router();
 
 router.all('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '..', 'views', 'index.html'));
+    // res.sendFile(path.join(__dirname, '..', 'views', 'index.html'));
+    res.render('index', { name: 'Josh' });
 });
 
 router.get('/error-demo', (req, res, next) => {

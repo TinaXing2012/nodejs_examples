@@ -7,6 +7,9 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 const app = express();
+
+app.set('view engine', 'ejs');
+
 //false: querystring
 //true: qs
 app.use(bodyParser.urlencoded({ extended: true }));
