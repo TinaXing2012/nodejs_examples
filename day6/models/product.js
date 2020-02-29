@@ -2,7 +2,8 @@ const products = [];
 
 class Product {
 
-    constructor(title, price, imageURL, description) {
+    constructor(id, title, price, imageURL, description) {
+        this.id = id;
         this.title = title;
         this.price = price;
         this.imageURL = imageURL;
@@ -10,11 +11,16 @@ class Product {
     }
 
     save() {
+        this.id = Math.floor(Math.random() * 100000);
         products.push(this);
     }
 
     static findAll() {
         return products;
+    }
+
+    static findById(prodId) {
+        return products.filter(p => p.id == prodId);
     }
 
 }
