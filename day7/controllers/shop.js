@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const Cart = require('../models/cart');
 
 exports.getAllProducts = (req, res, next) => {
     const products = Product.findAll();
@@ -9,4 +10,13 @@ exports.getAllProducts = (req, res, next) => {
 exports.getProductDetail = (req, res, next) => {
     const products = Product.findById(req.params.prodId);
     res.render('product-detail', { prod: products[0], pageTitle: 'Product Detail', path: '/', name: 'Edward' });
+}
+
+exports.addToCart = (req, res, next) => {
+    const addedProduct = Product.findById(req.body.id)[0];
+
+    Cart.save(addedProduct);
+    console.log(Cart.getCart());
+    res.end('saved succesfully');
+
 }

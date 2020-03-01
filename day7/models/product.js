@@ -5,7 +5,7 @@ class Product {
     constructor(id, title, price, imageURL, description) {
         this.id = id;
         this.title = title;
-        this.price = price;
+        this.price = new Number(price);
         this.imageURL = imageURL;
         this.description = description;
     }
