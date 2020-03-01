@@ -11,13 +11,9 @@ router.get('/add-product', adminController.getProductForm);
 
 router.post('/add-product', adminController.postProduct);
 
-router.get('/edit-product', (req, res, next) => {
-    fs.createReadStream(path.join(__dirname, '..', 'views', 'add-product.html')).pipe(res);
-});
+router.get('/edit-product/:prodId', adminController.editProductPage);
 
-router.post('/edit-product', (req, res, next) => {
-    fs.createReadStream(path.join(__dirname, '..', 'views', 'add-product.html')).pipe(res);
-});
+router.post('/edit-product', adminController.editProductPost);
 
 router.post('/delete-product', (req, res, next) => {
     fs.createReadStream(path.join(__dirname, '..', 'views', 'add-product.html')).pipe(res);

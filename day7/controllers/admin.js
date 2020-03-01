@@ -15,3 +15,15 @@ exports.postProduct = (req, res, next) => {
 
     res.redirect('/');
 }
+
+exports.editProductPage = (req, res, next) => {
+    const products = Product.findById(req.params.prodId);
+    res.render('edit-product', { product: products[0], path: '/', pageTitle: 'Edit Product', name: 'Tina' });
+}
+
+exports.editProductPost = (req, res, next) => {
+    const updatedProduct = new Product(req.body.id, req.body.title, req.body.price, req.body.imageURL, req.body.description);
+    updatedProduct.update();
+    // res.redirect('/');
+    res.redirect('/products/' + updatedProduct.id);
+}

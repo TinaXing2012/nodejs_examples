@@ -23,6 +23,11 @@ class Product {
         return products.filter(p => p.id == prodId);
     }
 
+    update() {
+        const editProductIndex = products.findIndex(p => p.id == this.id);
+        products[editProductIndex] = this;
+    }
+
 }
 
 module.exports = Product;
