@@ -15,10 +15,14 @@ exports.getProductDetail = (req, res, next) => {
 exports.addToCart = (req, res, next) => {
     const addedProduct = Product.findById(req.body.id)[0];
     Cart.save(addedProduct);
-    console.log(Cart.getCart());
     res.redirect('/cart');
 }
 
 exports.getCart = (req, res, next) => {
     res.render('cart', { cart: Cart.getCart(), pageTitle: 'Shopping Cart Detail', path: '/cart', name: 'Edward' })
+}
+
+exports.deleteInCart = (req, res, next) => {
+    Cart.delete(req.body.prodId);
+    res.redirect('/cart');
 }

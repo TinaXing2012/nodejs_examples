@@ -45,6 +45,12 @@
                                                                 <td>
                                                                     <%= product.qty%>
                                                                 </td>
+                                                                <td>
+                                                                    <form action="/delete-cart" method="POST">
+                                                                        <input type="hidden" name="prodId" value="<%= product.id%>">
+                                                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                                                    </form>
+                                                                </td>
                                                             </tr>
                                                             <%}%>
                                                                 <tr>

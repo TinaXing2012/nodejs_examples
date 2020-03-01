@@ -9,7 +9,6 @@ module.exports = class Cart {
         }
 
         const existingProductIndex = cart.products.findIndex(p => p.id == product.id); // to check product is existing in cart
-        console.log('existingProductIndex: ', existingProductIndex);
         if (existingProductIndex >= 0) { // exist in cart already
             const exsitingProduct = cart.products[existingProductIndex];
             exsitingProduct.qty += 1;
@@ -23,6 +22,13 @@ module.exports = class Cart {
 
     static getCart() {
         return cart;
+    }
+
+    static delete(productId) {
+        const isExisting = cart.products.findIndex(p => p.id == productId);
+        if (isExisting >= 0) {
+            cart.products.splice(isExisting, 1);
+        }
     }
 
 }
