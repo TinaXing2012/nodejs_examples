@@ -28,6 +28,11 @@ class Product {
         products[editProductIndex] = this;
     }
 
+    static deleteById(prodId) {
+        const deleteProductIndex = products.findIndex(p => p.id == prodId);
+        products.splice(deleteProductIndex, 1);
+    }
+
 }
 
 module.exports = Product;

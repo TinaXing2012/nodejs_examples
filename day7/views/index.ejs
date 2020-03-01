@@ -39,6 +39,10 @@
                                                 <div class="card-footer">
                                                     <a class="btn btn-primary" href="/products/<%=p.id%>" role="button">View Details</a>
                                                     <a class="btn btn-primary" href="/admin/edit-product/<%=p.id%>" role="button">Edit</a>
+                                                    <form action="/admin/delete-product" method="POST">
+                                                        <input type="hidden" name="id" value="<%=p.id%>">
+                                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
