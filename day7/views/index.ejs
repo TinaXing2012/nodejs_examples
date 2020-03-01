@@ -1,0 +1,59 @@
+<%- include('layouts/head.ejs')%>
+
+    <body>
+
+        <%- include('layouts/navigation.ejs')%>
+
+            <!-- Page Content -->
+            <div class="container">
+
+                <div class="row">
+
+                    <%- include('layouts/sidebar.ejs')%>
+
+
+                        <div class="col-lg-9">
+
+                            <%- include('layouts/carousel.ejs')%>
+
+                                <div class="row">
+
+                                    <% for(let p of prods) {%>
+
+                                        <div class="col-lg-4 col-md-6 mb-4">
+                                            <div class="card h-100">
+                                                <a href="#"><img class="card-img-top" src="<%= p.imageURL%>" alt=""></a>
+                                                <div class="card-body">
+                                                    <h4 class="card-title">
+                                                        <a href="#">
+                                                            <%= p.title%>
+                                                        </a>
+                                                    </h4>
+                                                    <h5>$
+                                                        <%= p.price%>
+                                                    </h5>
+                                                    <!-- <p class="card-text">
+                                                        <%= p.description%>
+                                                    </p> -->
+                                                </div>
+                                                <div class="card-footer">
+                                                    <a class="btn btn-primary" href="/products/<%=p.id%>" role="button">View Details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <%
+                                    }
+                                    %>
+
+                                </div>
+                                <!-- /.row -->
+                        </div>
+                        <!-- /.col-lg-9 -->
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container -->
+
+            <%- include('layouts/end.ejs')%>
