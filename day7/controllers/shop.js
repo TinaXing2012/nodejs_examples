@@ -14,9 +14,11 @@ exports.getProductDetail = (req, res, next) => {
 
 exports.addToCart = (req, res, next) => {
     const addedProduct = Product.findById(req.body.id)[0];
-
     Cart.save(addedProduct);
     console.log(Cart.getCart());
-    res.end('saved succesfully');
+    res.redirect('/cart');
+}
 
+exports.getCart = (req, res, next) => {
+    res.render('cart', { cart: Cart.getCart(), pageTitle: 'Shopping Cart Detail', path: '/cart', name: 'Edward' })
 }
