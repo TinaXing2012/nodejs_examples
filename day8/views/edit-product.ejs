@@ -1,0 +1,48 @@
+<%- include('layouts/head.ejs')%>
+
+    <body>
+        <%- include('layouts/navigation.ejs')%>
+            <!-- Page Content -->
+            <div class="container">
+                <div class="row">
+                    <%- include('layouts/sidebar.ejs')%>
+                        <div class="col-lg-9">
+                            <%- include('layouts/carousel.ejs')%>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h2>Add Product</h2>
+
+                                        <form action="/admin/edit-product" method="POST">
+                                            <input type="hidden" name="id" value="<%= product.id%>">
+                                            <div class="form-group">
+                                                <label for="title">Title</label>
+                                                <input class="form-control" id="title" name="title" value="<%= product.title%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="price">Price</label>
+                                                <input class="form-control" id="price" name="price" value="<%= product.price%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="imageURL">Image URL</label>
+                                                <input class="form-control" id="imageURL" name="imageURL" value="<%= product.imageURL%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="description">Description</label>
+                                                <textarea class="form-control" name="description" id="description"><%= product.description%></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+                                        <br>
+                                    </div>
+
+                                </div>
+                                <!-- /.row -->
+                        </div>
+                        <!-- /.col-lg-9 -->
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container -->
+
+            <%- include('layouts/end.ejs')%>

@@ -1,0 +1,36 @@
+<%- include('layouts/head.ejs')%>
+
+    <body>
+        <%- include('layouts/navigation.ejs')%>
+            <!-- Page Content -->
+            <div class="container">
+                <div class="row">
+                    <%- include('layouts/sidebar.ejs')%>
+                        <div class="col-lg-9">
+                            <%- include('layouts/carousel.ejs')%>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h1>
+                                            <%= prod.title %>
+                                        </h1>
+                                        <p><img src="<%= prod.imageURL%>" /></p>
+                                        <p>Price:
+                                            <%= prod.price%>
+                                        </p>
+                                        <p>Description:
+                                            <%= prod.description%>
+                                        </p>
+                                        <br>
+                                    </div>
+
+                                </div>
+                                <!-- /.row -->
+                        </div>
+                        <!-- /.col-lg-9 -->
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container -->
+
+            <%- include('layouts/end.ejs')%>
