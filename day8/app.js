@@ -5,6 +5,7 @@ const path = require('path');
 
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+const mongoConnect = require('./util/database').mongoConnect;
 
 const app = express();
 
@@ -33,4 +34,6 @@ app.use((req, res, next) => {
 //     res.status(500).send('Something Broke!');
 // });
 
-app.listen(3000);
+mongoConnect(() => {
+    app.listen(3000);
+})

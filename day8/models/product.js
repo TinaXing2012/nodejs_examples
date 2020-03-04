@@ -1,5 +1,5 @@
 const products = [];
-const mongoConnect = require('../util/database');
+const getDB = require('../util/database').getDB;
 
 class Product {
 
@@ -15,18 +15,25 @@ class Product {
         // this.id = Math.floor(Math.random() * 100000);
         // products.push(this);
 
-        mongoConnect((client) => {
-            client.db('onlineshopping')
-                .collection('products')
-                .insertOne(this)
-                .then(result => {
-                    console.log(result.result);
-                    client.close();
-                })
-                .catch(err => console.log(err));
+        // mongoConnect((client) => {
+        //     client.db('onlineshopping')
+        //         .collection('products')
+        //         .insertOne(this)
+        //         .then(result => {
+        //             console.log(result.result);
+        //             client.close();
+        //         })
+        //         .catch(err => console.log(err));
 
-        });
+        // });
 
+        const db = getDB();
+        db.collection('products')
+            .insertOne(this)
+            .then(result => {
+                console.log(result.result);
+            })
+            .catch(err => console.log(err));
     }
 
     static findAll() {
