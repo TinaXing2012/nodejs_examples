@@ -37,7 +37,10 @@ class Product {
     }
 
     static findAll() {
-        return products;
+        const db = getDB();
+        return db.collection('products')
+            .find()
+            .toArray();
     }
 
     static findById(prodId) {

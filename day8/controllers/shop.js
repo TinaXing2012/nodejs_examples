@@ -1,28 +1,62 @@
-const Product = require('../models/product');
-const Cart = require('../models/cart');
+const products = [];
+const getDB = require('../util/database').getDB;
 
-exports.getAllProducts = (req, res, next) => {
-    const products = Product.findAll();
-    // console.log(products);
-    res.render('index', { name: 'Josh', prods: products, path: '/', pageTitle: 'Home' });
-};
+class Product {
 
-exports.getProductDetail = (req, res, next) => {
-    const products = Product.findById(req.params.prodId);
-    res.render('product-detail', { prod: products[0], pageTitle: 'Product Detail', path: '/', name: 'Edward' });
+    constructor(id, title, price, imageURL, description) {
+        this.id = id;
+        this.title = title;
+        this.price = new Number(price);
+        this.imageURL = imageURL;
+        this.description = description;
+    }
+
+    save() {
+        // this.id = Math.floor(Math.random() * 100000);
+        // products.push(this);
+
+        // mongoConnect((client) => {
+        //     client.db('onlineshopping')
+        //         .collection('products')
+        //         .insertOne(this)
+        //         .then(result => {
+        //             console.log(result.result);
+        //             client.close();
+        //         })
+        //         .catch(err => console.log(err));
+
+        // });
+
+        const db = getDB();
+        db.collection('products')
+            .insertOne(this)
+            .then(result => {
+                console.log(result.result);
+            })
+            .catch(err => console.log(err));
+    }
+
+    static findAll() {
+        const db = getDB();
+        return db.collection('products')
+            .find()
+            .toArray();
+    }
+
+    static findById(prodId) {
+        return products.filter(p => p.id == prodId);
+    }
+
+    update() {
+        const editProductIndex = products.findIndex(p => p.id == this.id);
+        products[editProductIndex] = this;
+    }
+
+    static deleteById(prodId) {
+        const deleteProductIndex = products.findIndex(p => p.id == prodId);
+        products.splice(deleteProductIndex, 1);
+    }
+
 }
 
-exports.addToCart = (req, res, next) => {
-    const addedProduct = Product.findById(req.body.id)[0];
-    Cart.save(addedProduct);
-    res.redirect('/cart');
-}
-
-exports.getCart = (req, res, next) => {
-    res.render('cart', { cart: Cart.getCart(), pageTitle: 'Shopping Cart Detail', path: '/cart', name: 'Edward' })
-}
-
-exports.deleteInCart = (req, res, next) => {
-    Cart.delete(req.body.prodId);
-    res.redirect('/cart');
-}
+module.exports = Product;
