@@ -13,12 +13,8 @@ class Product {
 
     save() {
         const db = getDB();
-        db.collection('products')
-            .insertOne(this)
-            .then(result => {
-                console.log(result.result);
-            })
-            .catch(err => console.log(err));
+        return db.collection('products')
+            .insertOne(this);
     }
 
     static findAll() {
