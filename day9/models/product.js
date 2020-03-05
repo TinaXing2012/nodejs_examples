@@ -1,10 +1,11 @@
 const products = [];
 const getDB = require('../util/database').getDB;
+const ObjectId = require('mongodb').ObjectId;
 
 class Product {
 
     constructor(id, title, price, imageURL, description) {
-        this.id = id;
+        this._id = id;
         this.title = title;
         this.price = price;
         this.imageURL = imageURL;
@@ -25,7 +26,11 @@ class Product {
     }
 
     static findById(prodId) {
-        return products.filter(p => p.id == prodId);
+        // return products.filter(p => p.id == prodId);
+        const db = getDB();
+        return db.collection('products')
+            .findOne({ _id: new ObjectId(prodId) });
+
     }
 
     update() {

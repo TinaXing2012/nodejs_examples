@@ -11,8 +11,12 @@ exports.getAllProducts = (req, res, next) => {
 };
 
 exports.getProductDetail = (req, res, next) => {
-    const products = Product.findById(req.params.prodId);
-    res.render('product-detail', { prod: products[0], pageTitle: 'Product Detail', path: '/', name: 'Edward' });
+    Product.findById(req.params.prodId)
+        .then(product => {
+            console.log('prodcut: ', product);
+            res.render('product-detail', { prod: product, pageTitle: 'Product Detail', path: '/', name: 'Edward' });
+        })
+        .catch(err => console.log(err));
 }
 
 exports.addToCart = (req, res, next) => {
