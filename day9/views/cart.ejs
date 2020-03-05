@@ -1,0 +1,81 @@
+<%- include('layouts/head.ejs')%>
+
+    <body>
+        <%- include('layouts/navigation.ejs')%>
+            <!-- Page Content -->
+            <div class="container">
+                <div class="row">
+                    <%- include('layouts/sidebar.ejs')%>
+                        <div class="col-lg-9">
+                            <%- include('layouts/carousel.ejs')%>
+                                <div class="row">
+                                    <div class="col-sm-12">
+
+                                        <% if (cart === null || cart.products.length == 0) {%>
+
+                                            <h2>No item in shopping Cart</h2>
+
+                                            <%} else {%>
+                                                <h2>Shopping Cart Detail</h2>
+
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Title</th>
+                                                            <th scope="col">Price</th>
+                                                            <th scope="col">Quantity</th>
+                                                            <th scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% for(let i = 0; i < cart.products.length; i++){
+                                                            let product = cart.products[i];  
+                                                        %>
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    <%= i+1%>
+                                                                </th>
+                                                                <td>
+                                                                    <%= product.title%>
+                                                                </td>
+                                                                <td>
+                                                                    <%= product.price%>
+                                                                </td>
+                                                                <td>
+                                                                    <%= product.qty%>
+                                                                </td>
+                                                                <td>
+                                                                    <form action="/delete-cart" method="POST">
+                                                                        <input type="hidden" name="prodId" value="<%= product.id%>">
+                                                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                            <%}%>
+                                                                <tr>
+                                                                    <td>Total Price: </td>
+                                                                    <td colspan="4">
+                                                                        <%= cart.totalPrice%>
+                                                                    </td>
+                                                                </tr>
+                                                    </tbody>
+                                                </table>
+
+
+                                                <%}%>
+
+                                                    <br>
+                                    </div>
+
+                                </div>
+                                <!-- /.row -->
+                        </div>
+                        <!-- /.col-lg-9 -->
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container -->
+
+            <%- include('layouts/end.ejs')%>
