@@ -29,9 +29,13 @@ exports.editProductPage = (req, res, next) => {
 
 exports.editProductPost = (req, res, next) => {
     const updatedProduct = new Product(req.body.id, req.body.title, req.body.price, req.body.imageURL, req.body.description);
-    updatedProduct.update();
+    updatedProduct.update()
+        .then(result => {
+            res.redirect('/products/' + updatedProduct._id);
+        })
+        .catch(err => console.log(err));
     // res.redirect('/');
-    res.redirect('/products/' + updatedProduct.id);
+
 }
 
 exports.deleteProduct = (req, res, next) => {

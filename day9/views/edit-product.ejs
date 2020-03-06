@@ -13,7 +13,7 @@
                                         <h2>Add Product</h2>
 
                                         <form action="/admin/edit-product" method="POST">
-                                            <input type="hidden" name="id" value="<%= product.id%>">
+                                            <input type="hidden" name="id" value="<%= product._id%>">
                                             <div class="form-group">
                                                 <label for="title">Title</label>
                                                 <input class="form-control" id="title" name="title" value="<%= product.title%>">

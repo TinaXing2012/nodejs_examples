@@ -34,8 +34,16 @@ class Product {
     }
 
     update() {
-        const editProductIndex = products.findIndex(p => p.id == this.id);
-        products[editProductIndex] = this;
+        const db = getDB();
+        return db.collection('products')
+            .updateOne({ _id: new ObjectId(this._id) }, {
+                $set: {
+                    title: this.title,
+                    price: this.price,
+                    imageURL: this.imageURL,
+                    description: this.description
+                }
+            });
     }
 
     static deleteById(prodId) {
