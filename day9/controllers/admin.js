@@ -20,8 +20,11 @@ exports.postProduct = (req, res, next) => {
 }
 
 exports.editProductPage = (req, res, next) => {
-    const products = Product.findById(req.params.prodId);
-    res.render('edit-product', { product: products[0], path: '/', pageTitle: 'Edit Product', name: 'Tina' });
+    Product.findById(req.params.prodId)
+        .then(product => {
+            res.render('edit-product', { product: product, path: '/', pageTitle: 'Edit Product', name: 'Tina' });
+        }).catch(err => console.log(err));
+
 }
 
 exports.editProductPost = (req, res, next) => {
