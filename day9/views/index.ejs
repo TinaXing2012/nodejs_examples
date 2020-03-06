@@ -40,7 +40,7 @@
                                                     <a class="btn btn-primary" href="/products/<%=p._id%>" role="button">View Details</a>
                                                     <a class="btn btn-primary" href="/admin/edit-product/<%=p._id%>" role="button">Edit</a>
                                                     <form action="/admin/delete-product" method="POST">
-                                                        <input type="hidden" name="id" value="<%=p.id%>">
+                                                        <input type="hidden" name="id" value="<%=p._id%>">
                                                         <button type="submit" class="btn btn-primary">Delete</button>
                                                     </form>
                                                     <form action="/add-to-cart" method="POST">

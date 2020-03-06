@@ -39,6 +39,10 @@ exports.editProductPost = (req, res, next) => {
 }
 
 exports.deleteProduct = (req, res, next) => {
-    Product.deleteById(req.body.id);
-    res.redirect('/');
+    Product.deleteById(req.body.id)
+        .then(result => {
+            res.redirect('/');
+        })
+        .catch(err => console.log(err));
+
 }

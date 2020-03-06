@@ -47,8 +47,9 @@ class Product {
     }
 
     static deleteById(prodId) {
-        const deleteProductIndex = products.findIndex(p => p.id == prodId);
-        products.splice(deleteProductIndex, 1);
+        const db = getDB();
+        return db.collection('products')
+            .remove({ _id: new ObjectId(prodId) });
     }
 
 }
