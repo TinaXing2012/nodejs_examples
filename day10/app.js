@@ -2,10 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
+const mongoose = require('mongoose');
 
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
-const mongoConnect = require('./util/database').mongoConnect;
 
 const app = express();
 
@@ -33,7 +33,10 @@ app.use((req, res, next) => {
 // app.use((err, req, res, next) => {
 //     res.status(500).send('Something Broke!');
 // });
-
-mongoConnect(() => {
-    app.listen(3000);
-})
+mongoose.connect('mongodb://localhost:27017/onlineshopping', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        app.listen(3000, () => {
+            console.log('Server is running on 3000');
+        });
+    })
+    .catch(err => console.log(err));
