@@ -1,57 +1,28 @@
-const products = [];
-const getDB = require('../util/database').getDB;
-const ObjectId = require('mongodb').ObjectId;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-class Product {
+const productSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    imageURL: {
+        type: String,
+        required: true
+    },
+    price: Number,
+    description: String
+});
 
-    constructor(id, title, price, imageURL, description) {
-        this._id = id;
-        this.title = title;
-        this.price = price;
-        this.imageURL = imageURL;
-        this.description = description;
-    }
+// model name: 'Product' will be used to turn into a collection name in DB
+// 'Product' => 'product' + 's' => products
+module.exports = mongoose.model('Product', productSchema);
 
-    save() {
-        const db = getDB();
-        return db.collection('products')
-            .insertOne(this);
-    }
 
-    static findAll() {
-        const db = getDB();
-        return db.collection('products')
-            .find()
-            .toArray();
-    }
-
-    static findById(prodId) {
-        // return products.filter(p => p.id == prodId);
-        const db = getDB();
-        return db.collection('products')
-            .findOne({ _id: new ObjectId(prodId) });
-
-    }
-
-    update() {
-        const db = getDB();
-        return db.collection('products')
-            .updateOne({ _id: new ObjectId(this._id) }, {
-                $set: {
-                    title: this.title,
-                    price: this.price,
-                    imageURL: this.imageURL,
-                    description: this.description
-                }
-            });
-    }
-
-    static deleteById(prodId) {
-        const db = getDB();
-        return db.collection('products')
-            .remove({ _id: new ObjectId(prodId) });
-    }
-
-}
-
-module.exports = Product;
+// const prod = new productModel({
+//     title: "Node.js",
+//     imageURL: "https://launchclinic.com/wp-content/uploads/2015/09/Week-3-700-x-400.png",
+//     price: 10,
+//     description: "Good"
+// });
+// prod.save()

@@ -3,7 +3,7 @@ const Cart = require('../models/cart');
 
 exports.getAllProducts = (req, res, next) => {
 
-    Product.findAll()
+    Product.find()
         .then(products => {
             res.render('index', { name: 'Josh', prods: products, path: '/', pageTitle: 'Home' });
         })
