@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+const userRoutes = require('./routes/user');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
+app.use(userRoutes);
 
 app.use((req, res, next) => {
     res.status(404).send('Page Not Found');
