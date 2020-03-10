@@ -30,23 +30,17 @@ const userSchema = new Schema({
 
 userSchema.methods.addToCart = function(product) {
     const cart = this.cart;
-    if (cart.items.length === 0) {
-        cart.items.push({ productId: product._id, qty: 1 });
-        cart.totalPrice = product.price;
-
+    const isExisting = cart.items.findIndex(objInItems => new String(objInItems.productId).trim() === new String(product._id).trim());
+    if (isExisting >= 0) {
+        cart.items[isExisting].qty += 1;
     } else {
-        const isExisting = cart.items.findIndex(objInItems => new String(objInItems.productId).trim() === new String(product._id).trim());
-        if (isExisting === -1) {
-            cart.items.push({ productId: product._id, qty: 1 });
-            cart.totalPrice += product.price;
-        } else {
-            const existingItem = cart.items[isExisting];
-            existingItem.qty += 1;
-            cart.totalPrice += product.price;
-        }
+        cart.items.push({ productId: product._id, qty: 1 });
     }
+    if (!cart.totalPrice) {
+        cart.totalPrice = 0;
+    }
+    cart.totalPrice += product.price;
     return this.save();
-
 };
 
 //'User' => users

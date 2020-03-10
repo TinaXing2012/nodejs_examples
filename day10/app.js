@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/abc', express.static(path.join(__dirname, 'public', 'css')));
 
 app.use((req, res, next) => {
-    User.findById('5e66f6a553b9dd4654d257e7')
+    User.findById('5e66f647332d982a9c46d051')
         .then(userInDB => {
             req.user = userInDB;
             next();
