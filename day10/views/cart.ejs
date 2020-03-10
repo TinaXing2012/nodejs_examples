@@ -11,7 +11,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
 
-                                        <% if (cart === null || cart.products.length == 0) {%>
+                                        <% if (cart === null || cart.items.length == 0) {%>
 
                                             <h2>No item in shopping Cart</h2>
 
@@ -29,25 +29,25 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <% for(let i = 0; i < cart.products.length; i++){
-                                                            let product = cart.products[i];  
+                                                        <% for(let i = 0; i < cart.items.length; i++){
+                                                            let eachItem = cart.items[i];  
                                                         %>
                                                             <tr>
                                                                 <th scope="row">
                                                                     <%= i+1%>
                                                                 </th>
                                                                 <td>
-                                                                    <%= product.title%>
+                                                                    <%= eachItem.productId.title%>
                                                                 </td>
                                                                 <td>
-                                                                    <%= product.price%>
+                                                                    <%= eachItem.productId.price%>
                                                                 </td>
                                                                 <td>
-                                                                    <%= product.qty%>
+                                                                    <%= eachItem.qty%>
                                                                 </td>
                                                                 <td>
                                                                     <form action="/delete-cart" method="POST">
-                                                                        <input type="hidden" name="prodId" value="<%= product.id%>">
+                                                                        <input type="hidden" name="prodId" value="<%= eachItem.productId._id%>">
                                                                         <button type="submit" class="btn btn-primary">Delete</button>
                                                                     </form>
                                                                 </td>

@@ -26,7 +26,15 @@ exports.addToCart = (req, res, next) => {
 }
 
 exports.getCart = (req, res, next) => {
-    res.render('cart', { cart: Cart.getCart(), pageTitle: 'Shopping Cart Detail', path: '/cart', name: 'Edward' })
+
+    req.user
+        .populate('cart.items.productId')
+        .execPopulate()
+        .then(user => {
+            console.log(user);
+            res.render('cart', { cart: user.cart, pageTitle: 'Shopping Cart Detail', path: '/cart', name: 'Edward' });
+        })
+        .catch(err => console.log(err));
 }
 
 exports.deleteInCart = (req, res, next) => {
