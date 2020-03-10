@@ -50,7 +50,10 @@ exports.editProductPost = (req, res, next) => {
 }
 
 exports.deleteProduct = (req, res, next) => {
-    Product.deleteById(req.body.id)
+
+    // Product.deleteOne({ _id: req.body.id }) //deleteOne mongodb
+    // Product.findByIdAndDelete(req.body.id) //findOneAndDelete
+    Product.findByIdAndRemove(req.body.id) //findAndModify
         .then(result => {
             res.redirect('/');
         })
