@@ -48,5 +48,15 @@ userSchema.methods.addToCart = async function(productId) {
 
 };
 
+
+userSchema.methods.removeFromCart = function(productId) {
+    const cart = this.cart;
+    const isExisting = cart.items.findIndex(objInItems => new String(objInItems.productId).trim() === new String(productId).trim());
+    if (isExisting >= 0) {
+        cart.items.splice(isExisting, 1);
+        return this.save();
+    }
+}
+
 //'User' => users
 module.exports = mongoose.model('User', userSchema);

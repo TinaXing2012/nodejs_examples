@@ -1,5 +1,4 @@
 const Product = require('../models/product');
-const Cart = require('../models/cart');
 
 exports.getAllProducts = (req, res, next) => {
     Product.find()
@@ -12,7 +11,6 @@ exports.getAllProducts = (req, res, next) => {
 exports.getProductDetail = (req, res, next) => {
     Product.findById(req.params.prodId)
         .then(product => {
-            console.log('prodcut: ', product);
             res.render('product-detail', { prod: product, pageTitle: 'Product Detail', path: '/', name: 'Edward' });
         })
         .catch(err => console.log(err));
@@ -26,7 +24,6 @@ exports.addToCart = (req, res, next) => {
 }
 
 exports.getCart = (req, res, next) => {
-
     req.user
         .populate('cart.items.productId')
         .execPopulate()
@@ -38,6 +35,9 @@ exports.getCart = (req, res, next) => {
 }
 
 exports.deleteInCart = (req, res, next) => {
-    Cart.delete(req.body.prodId);
-    res.redirect('/cart');
+    req.user.removeFromCart(req.body.prodId)
+        .then(() => {
+            res.redirect('/cart');
+        }).catch(err => console.log(err));
+
 }
