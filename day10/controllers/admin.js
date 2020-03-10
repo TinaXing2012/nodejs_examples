@@ -5,12 +5,12 @@ exports.getProductForm = (req, res, next) => {
 }
 
 exports.postProduct = (req, res, next) => {
-    const title = req.body.title;
-    const imageUrl = req.body.imageURL;
-    const price = req.body.price;
-    const description = req.body.description;
-
-    const prod = new Product(null, title, price, imageUrl, description);
+    const prod = new Product({
+        title: req.body.title,
+        imageURL: req.body.imageURL,
+        price: req.body.price,
+        description: req.body.description
+    });
     prod.save()
         .then(result => {
             res.redirect('/');
@@ -28,14 +28,25 @@ exports.editProductPage = (req, res, next) => {
 }
 
 exports.editProductPost = (req, res, next) => {
-    const updatedProduct = new Product(req.body.id, req.body.title, req.body.price, req.body.imageURL, req.body.description);
-    updatedProduct.update()
+
+    Product.updateOne({ _id: req.body.id }, { $set: { title: req.body.title, imageURL: req.body.imageURL, price: req.body.price, description: req.body.description } })
         .then(result => {
-            res.redirect('/products/' + updatedProduct._id);
+            res.redirect('/products/' + req.body.id);
         })
         .catch(err => console.log(err));
-    // res.redirect('/');
 
+    // Product.findByIdAndUpdate(req.body.id)
+    //     .then(oldProduct => {
+    //         oldProduct.title = req.body.title;
+    //         oldProduct.imageURL = req.body.imageURL;
+    //         oldProduct.price = req.body.price;
+    //         oldProduct.description = req.body.description;
+    //         return oldProduct.save();
+    //     })
+    //     .then(result => {
+    //         res.redirect('/products/' + req.body.id);
+    //     })
+    //     .catch(err => console.log(err));
 }
 
 exports.deleteProduct = (req, res, next) => {
