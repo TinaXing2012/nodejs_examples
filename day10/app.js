@@ -7,10 +7,12 @@ const mongoose = require('mongoose');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const userRoutes = require('./routes/user');
+const User = require('./models/user');
 
 const app = express();
 
 app.set('view engine', 'ejs');
+mongoose.set('useCreateIndex', true);
 
 //false: querystring
 //true: qs
@@ -23,6 +25,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 //http://localhost:3000/abc => css folder
 //http://localhost:3000/abc/main.css
 // app.use('/abc', express.static(path.join(__dirname, 'public', 'css')));
+
+app.use((req, res, next) => {
+    User.findById('5e66f74d0326f45acc67a162')
+        .then(userInDB => {
+            req.user = userInDB;
+            next();
+        })
+        .catch(err => console.log(err));
+});
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
