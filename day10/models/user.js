@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Product = require('../models/product');
 
 const Schema = mongoose.Schema;
 
@@ -28,19 +29,23 @@ const userSchema = new Schema({
     }
 });
 
-userSchema.methods.addToCart = function(product) {
-    const cart = this.cart;
-    const isExisting = cart.items.findIndex(objInItems => new String(objInItems.productId).trim() === new String(product._id).trim());
-    if (isExisting >= 0) {
-        cart.items[isExisting].qty += 1;
-    } else {
-        cart.items.push({ productId: product._id, qty: 1 });
+userSchema.methods.addToCart = async function(productId) {
+    const product = await Product.findById(productId);
+    if (product) {
+        const cart = this.cart;
+        const isExisting = cart.items.findIndex(objInItems => new String(objInItems.productId).trim() === new String(product._id).trim());
+        if (isExisting >= 0) {
+            cart.items[isExisting].qty += 1;
+        } else {
+            cart.items.push({ productId: product._id, qty: 1 });
+        }
+        if (!cart.totalPrice) {
+            cart.totalPrice = 0;
+        }
+        cart.totalPrice += product.price;
+        return this.save();
     }
-    if (!cart.totalPrice) {
-        cart.totalPrice = 0;
-    }
-    cart.totalPrice += product.price;
-    return this.save();
+
 };
 
 //'User' => users

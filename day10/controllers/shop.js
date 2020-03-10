@@ -19,14 +19,10 @@ exports.getProductDetail = (req, res, next) => {
 }
 
 exports.addToCart = (req, res, next) => {
-    Product.findById(req.body.id)
-        .then(product => {
-            req.user.addToCart(product)
-                .then(() => {
-                    res.redirect('/cart');
-                })
+    req.user.addToCart(req.body.id)
+        .then(() => {
+            res.redirect('/cart');
         }).catch(err => console.log(err));
-
 }
 
 exports.getCart = (req, res, next) => {
