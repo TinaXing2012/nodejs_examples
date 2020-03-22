@@ -19,8 +19,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //http://localhost:3000/abc/main.css
 app.use('/abc', express.static(path.join(__dirname, 'public', 'css')));
 
-app.use('/admin', adminRoutes);
-app.use(shopRoutes);
+
+// app.use('/admin', adminRoutes);
+// app.use(shopRoutes);
+
+app.use((req, res, next) => {
+    console.log('this is the first middleware....');
+    next();
+});
+
+app.use((req, res, next) => {
+    next('fadfadfadfafsa');
+    // console.log('this is the second middleware....');
+});
+
+app.use((req, res, next) => {
+    console.log('this is the third middleware....');
+    res.end('Done....');
+});
+
 
 app.use((req, res, next) => {
     res.status(404).send('Page Not Found');
