@@ -24,20 +24,20 @@ app.use('/abc', express.static(path.join(__dirname, 'public', 'css')));
 // app.use(shopRoutes);
 
 app.use((req, res, next) => {
-    console.log('this is the first middleware....');
+    console.log('This is 1st middleweare');
     next();
 });
 
 app.use((req, res, next) => {
-    next('fadfadfadfafsa');
-    // console.log('this is the second middleware....');
+    // return next('route');
+    return next('something else...');
+    console.log('This is 2nd middleweare');
 });
 
 app.use((req, res, next) => {
-    console.log('this is the third middleware....');
+    console.log('This is 3rd middleweare');
     res.end('Done....');
 });
-
 
 app.use((req, res, next) => {
     res.status(404).send('Page Not Found');
