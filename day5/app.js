@@ -20,24 +20,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/abc', express.static(path.join(__dirname, 'public', 'css')));
 
 
-// app.use('/admin', adminRoutes);
-// app.use(shopRoutes);
+app.use('/admin', adminRoutes);
+app.use(shopRoutes);
 
-app.use((req, res, next) => {
-    console.log('This is 1st middleweare');
-    next();
-});
+// app.use((req, res, next) => {
+//     console.log('This is 1st middleweare');
+//     next();
+// });
 
-app.use((req, res, next) => {
-    // return next('route');
-    return next('something else...');
-    console.log('This is 2nd middleweare');
-});
+// app.use((req, res, next) => {
+//     // return next('route');
+//     return next('something else...');
+//     console.log('This is 2nd middleweare');
+// });
 
-app.use((req, res, next) => {
-    console.log('This is 3rd middleweare');
-    res.end('Done....');
-});
+// app.use((req, res, next) => {
+//     console.log('This is 3rd middleweare');
+//     res.end('Done....');
+// });
 
 app.use((req, res, next) => {
     res.status(404).send('Page Not Found');

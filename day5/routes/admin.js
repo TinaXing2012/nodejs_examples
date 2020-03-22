@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const rootDir = require('../util/path');
 
 const router = express.Router();
 
@@ -9,7 +10,8 @@ router.get('/add-product', (req, res, next) => {
     // res.setHeader('content-type', 'text/html');
     // const file = fs.readFileSync(path.join(__dirname, 'views', 'add-product.html'), 'utf-8');
     // res.send(file.toString());
-    fs.createReadStream(path.join(__dirname, '..', 'views', 'add-product.html')).pipe(res);
+    // fs.createReadStream(path.join(__dirname, '..', 'views', 'add-product.html')).pipe(res);
+    fs.createReadStream(path.join(rootDir, 'views', 'add-product.html')).pipe(res);
 });
 
 router.post('/add-product', (req, res, next) => {
