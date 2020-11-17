@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/abc', express.static(path.join(__dirname, 'public', 'css')));
 
 app.use((req, res, next) => {
-    User.findById('5e66f68515f15f313c76b07f')
+    User.findById('5eefe430b863a43c0a57dac1')
         .then(userInDB => {
             req.user = userInDB;
             next();
@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 // app.use((err, req, res, next) => {
 //     res.status(500).send('Something Broke!');
 // });
-mongoose.connect('mongodb://localhost:27017/onlineshopping', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://nodejs:missxing@cluster0-z63dp.gcp.mongodb.net/onlineshopping?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         app.listen(3000, () => {
             console.log('Server is running on 3000');
