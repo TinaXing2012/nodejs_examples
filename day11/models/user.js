@@ -49,10 +49,12 @@ userSchema.methods.addToCart = async function(productId) {
 };
 
 
-userSchema.methods.removeFromCart = function(productId) {
+userSchema.methods.removeFromCart = async function(productId) {
     const cart = this.cart;
     const isExisting = cart.items.findIndex(objInItems => new String(objInItems.productId).trim() === new String(productId).trim());
     if (isExisting >= 0) {
+        const prod = await Product.findById(productId);
+        cart.totalPrice -= prod.price * cart.items[isExisting].qty;
         cart.items.splice(isExisting, 1);
         return this.save();
     }
